@@ -31,17 +31,41 @@ def product_details(request, id):
 def product_new(request):
   if request.method == 'POST':
     form = ProductForm(request.POST)
-
     if form.is_valid():
       product = form.save()
       product.save()
       return redirect('product_details', id=product.id)
-
   else:
     form = ProductForm()
-
   context = {
     'form': form,
   }
-
   return render(request, 'newproduct.html', context)
+
+
+def product_edit(request, id):
+  product = Product.objects.get(pk=id)
+  form = ProductForm(instance=product)
+  context = {
+    'form': form,
+    'title': 'Product Edit',
+    'product': product,
+  }
+  response = render(request, 'edit.html', context)
+  return HttpResponse(response)
+
+def edit_submit(request, id):
+  if request.method == 'POST':
+    product = Product.objects.get(pk=id)
+    form = ProductForm(request.POST, instance=product)
+    if form.is_valid():
+      product = form.save()
+      product.save()
+      return redirect('product_details', id=product.id)
+  else:
+    form = ProductForm()
+  context = {
+    'form': form,
+    'product': product,
+  }
+  return render(request, 'edit_product', context)

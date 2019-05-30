@@ -2,9 +2,10 @@
 
 {% block content %}
     <main>
-    <h2>{{ product.name }}</h2>
-    <p>{{ product.description }}</p>
-    <p>Price: {{ product.price_in_cents }}</p>
-</main>
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.description }}</p>
+        <p>Price: {{ product.price_in_cents }}</p>
+        <a href="{% url 'product_edit' id=product.pk %}">Edit Product</a>
+    </main>
 
 {% endblock %}

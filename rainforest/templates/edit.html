@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>TELL ME WHAT YOU WANT TO CHANGE ABOUT ME</h2>
+  <form method="POST" action="{% url 'edit_submit' id=product.pk %}">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+    <button type="submit">Edit Product</button>
+  </form>
+
+{% endblock %}
