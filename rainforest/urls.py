@@ -19,10 +19,11 @@ from rainforest import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.root),
+    path('', views.root, name='home'),
     path('products/', views.products_page, name='products_list'),
     path('products/<int:id>', views.product_details, name='product_details'),
     path('product/new/', views.product_new, name='product_new'),
     path('products/<int:id>/edit/', views.product_edit, name='product_edit'),
     path('products/<int:id>/edit_submit/', views.edit_submit, name='edit_submit'),
+    path('products/<int:id>/delete/', views.delete_product, name='delete_product'),
 ]

@@ -59,8 +59,8 @@ def edit_submit(request, id):
     product = Product.objects.get(pk=id)
     form = ProductForm(request.POST, instance=product)
     if form.is_valid():
-      product = form.save()
-      product.save()
+      save_product = form.save()
+      save_product.save()
       return redirect('product_details', id=product.id)
   else:
     form = ProductForm()
@@ -68,4 +68,10 @@ def edit_submit(request, id):
     'form': form,
     'product': product,
   }
-  return render(request, 'edit_product', context)
+  return render(request, 'product_edit', context)
+
+
+def delete_product(request, id):
+  product = Product.objects.get(pk=id)
+  product.delete()
+  return redirect('products_list')

@@ -8,4 +8,10 @@
         <a href="{% url 'product_edit' id=product.pk %}">Edit Product</a>
     </main>
 
+
+    <form method='POST' action="{% url 'delete_product' id=product.pk %}">
+        {% csrf_token %}
+
+        <button type="submit">DELETE</button>
+    </form>
 {% endblock %}
