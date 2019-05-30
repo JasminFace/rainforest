@@ -31,6 +31,7 @@ def product_details(request, id):
 def product_new(request):
   if request.method == 'POST':
     form = ProductForm(request.POST)
+
     if form.is_valid():
       product = form.save()
       product.save()
