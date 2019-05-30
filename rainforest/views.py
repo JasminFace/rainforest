@@ -3,6 +3,7 @@ from django.urls import path
 from django.shortcuts import render, redirect, reverse
 from rainforest.models import Product
 from django.views.decorators.http import require_http_methods
+from rainforest.forms import ProductForm
 
 
 def root(request):
@@ -25,3 +26,10 @@ def product_details(request, id):
   }
   response = render(request, 'product.html', context)
   return HttpResponse(response)
+
+def product_new(request):
+  form = ProductForm()
+  context = {
+    'form': form,
+  }
+  return render(request, 'newproduct.html', context)
