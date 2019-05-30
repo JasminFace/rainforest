@@ -16,3 +16,12 @@ def products_page(request):
   
   response = render(request, 'index.html', context)
   return HttpResponse(response)
+
+def product_details(request, id):
+  product = Product.objects.get(pk=id)
+  context = {
+    'title': product.name,
+    'product': product,
+  }
+  response = render(request, 'product.html', context)
+  return HttpResponse(response)
