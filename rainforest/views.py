@@ -27,9 +27,20 @@ def product_details(request, id):
   response = render(request, 'product.html', context)
   return HttpResponse(response)
 
+
 def product_new(request):
-  form = ProductForm()
+  if request.method == 'POST':
+    form = ProductForm(request.POST)
+    if form.is_valid():
+      product = form.save()
+      product.save()
+      return redirect('product_details', id=product.id)
+
+  else:
+    form = ProductForm()
+
   context = {
     'form': form,
   }
+
   return render(request, 'newproduct.html', context)

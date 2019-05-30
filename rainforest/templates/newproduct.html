@@ -2,7 +2,7 @@
 
 {% block content %}
   <h2>This is where you can add a brand new product. All by yourself.</h2>
-  <form method="POST" action="">
+  <form method="POST" action="{% url 'product_new' %}">
 
     {% csrf_token %}
 
