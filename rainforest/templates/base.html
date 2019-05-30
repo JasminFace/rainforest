@@ -7,7 +7,21 @@
     <title>{{ title }}</title>
 </head>
 <body>
+    <header>
+        <h1>Welcome to the Rainforest Cafe</h1>
+        <h4>We sell things for cents here</h4>
+        <nav>
+            <ul>
+                <li>
+                    <a href="{% url 'products_list' %}">Home</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
     {% block content %}
     {% endblock %}
+    <footer>
+        <p>&copy; Registered very good site 2019</p>
+    </footer>
 </body>
 </html>

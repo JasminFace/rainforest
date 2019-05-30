@@ -6,7 +6,7 @@ from django.views.decorators.http import require_http_methods
 
 
 def root(request):
-  return HttpResponseRedirect('/products')
+  return redirect('products_list')
 
 def products_page(request):
   context = {
