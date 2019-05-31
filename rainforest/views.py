@@ -117,3 +117,9 @@ def update_review(request, id, review_id):
       'review': review,
     }
     return render(request, 'review_edit.html', context)
+
+def delete_review(request, id, review_id):
+  product = Product.objects.get(pk=id)
+  review = Review.objects.get(pk=review_id)
+  review.delete()
+  return redirect('product_details', id=product.id)

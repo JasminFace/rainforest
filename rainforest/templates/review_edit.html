@@ -10,4 +10,7 @@
     <button type="submit">Edit Review</button>
   </form>
   <a href="{% url 'product_details' id=product.pk %}">Return</a>
+  
+  <a href="{% url 'delete_review' id=product.pk review_id=review.pk %}">DELETE</a>
+
 {% endblock %}
