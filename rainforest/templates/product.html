@@ -4,8 +4,12 @@
     <main>
         <h2>{{ product.name }}</h2>
         <p>{{ product.description }}</p>
-        <p>Price: {{ product.price_in_cents }}</p>
-        <a href="{% url 'product_edit' id=product.pk %}">Edit Product</a>
+        <p>Price: {{ product.price_in_dollars }}</p>
+
+        <form method= 'POST' action="{% url 'product_edit' id=product.pk %}">
+            {% csrf_token %}
+            <button type="submit">Edit Product</button>
+        </form>
     </main>
 
 
@@ -14,4 +18,14 @@
 
         <button type="submit">DELETE</button>
     </form>
+
+    <h4>Reviews</h4>
+    <ul>
+        {% for review in product.reviews.all %}
+        <li>
+            {{ review }}
+        </li>
+        {% endfor %}
+    </ul>
+
 {% endblock %}
