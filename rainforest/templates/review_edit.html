@@ -2,12 +2,12 @@
 
 {% block content %}
   <h2>Commit to the hills you stand on.</h2>
-  <form method="POST" action="">
+  <form method="POST" action="{% url 'update_review' id=product.pk review_id=review.pk %}">
 
     {% csrf_token %}
 
     {{ form.as_p }}
     <button type="submit">Edit Review</button>
   </form>
-  <a href="{% url 'product_details' id=review.pk %}">Return</a>
+  <a href="{% url 'product_details' id=product.pk %}">Return</a>
 {% endblock %}

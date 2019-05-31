@@ -88,13 +88,32 @@ def review_new(request, id):
       review.save()
       return redirect('product_details', id=product.id)
 
-def edit_review(request, id):
-  review = Review.objects.get(pk=id)
+def edit_review(request, id, review_id):
+  review = Review.objects.get(pk=review_id)
+  product = Product.objects.get(pk=id)
   form = ReviewForm(instance=review)
   context = {
     'form': form,
     'title': 'Review Edit',
-    'review': review
+    'review': review,
+    'product': product
   }
   response = render(request, 'review_edit.html', context)
   return HttpResponse(response)
+
+def update_review(request, id, review_id):
+  product = Product.objects.get(pk=id)
+  review = Review.objects.get(pk=review_id)
+  form = ReviewForm(request.POST, instance=review)
+  if form.is_valid():
+    save_review = form.save()
+    save_review.save()
+    # form.save()
+    return redirect('product_details', id=product.id)
+  else:
+    # form = ReviewForm()
+    context = {
+      'form': form,
+      'review': review,
+    }
+    return render(request, 'review_edit.html', context)
