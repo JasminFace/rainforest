@@ -14,6 +14,7 @@ class Product(models.Model):
 
 class Review(models.Model):
     comment = models.TextField()
+    published_date = models.DateField(auto_now_add=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
 
     def __str__(self):

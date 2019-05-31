@@ -1,9 +1,9 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import path
 from django.shortcuts import render, redirect, reverse
-from rainforest.models import Product
+from rainforest.models import Product, Review
 from django.views.decorators.http import require_http_methods
-from rainforest.forms import ProductForm
+from rainforest.forms import ProductForm, ReviewForm
 
 
 def root(request):
@@ -20,9 +20,12 @@ def products_page(request):
 
 def product_details(request, id):
   product = Product.objects.get(pk=id)
+  form = ReviewForm()
   context = {
     'title': product.name,
     'product': product,
+    'form': form,
+    'reviews': Review.objects.order_by('-published_date'),
   }
   response = render(request, 'product.html', context)
   return HttpResponse(response)
@@ -75,3 +78,13 @@ def delete_product(request, id):
   product = Product.objects.get(pk=id)
   product.delete()
   return redirect('products_list')
+
+def review_new(request, id):
+  if request.method == 'POST':
+    product = Product.objects.get(pk=id)
+    form = ReviewForm(request.POST)
+    if form.is_valid():
+      review = form.instance
+      review.product = product
+      review.save()
+      return redirect('product_details', id=product.id)

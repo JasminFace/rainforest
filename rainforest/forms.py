@@ -1,5 +1,5 @@
 from django import forms
-from rainforest.models import Product
+from rainforest.models import Product, Review
 
 class ProductForm(forms.ModelForm):
   class Meta:
@@ -13,3 +13,8 @@ class ProductForm(forms.ModelForm):
     description = data.get("description")
     if len(description) < 10 or len(description) > 500:
       self.add_error("description", "Description must be between 10 and 500 characters.")
+
+class ReviewForm(forms.ModelForm):
+  class Meta:
+    model = Review
+    fields = {'comment'}
