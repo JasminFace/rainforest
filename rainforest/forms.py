@@ -18,3 +18,9 @@ class ReviewForm(forms.ModelForm):
   class Meta:
     model = Review
     fields = {'comment'}
+
+  # def clean(self):
+  #   data = super().clean()
+  #   comment = data.get("comment")
+  #   if len(comment) < 10 or len(comment) > 500:
+  #     self.add_error("comment", "Review must be between 10 and 500 characters.")

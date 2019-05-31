@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Commit to the hills you stand on.</h2>
+  <form method="POST" action="">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+    <button type="submit">Edit Review</button>
+  </form>
+  <a href="{% url 'product_details' id=review.pk %}">Return</a>
+{% endblock %}

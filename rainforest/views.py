@@ -25,7 +25,6 @@ def product_details(request, id):
     'title': product.name,
     'product': product,
     'form': form,
-    'reviews': Review.objects.order_by('-published_date'),
   }
   response = render(request, 'product.html', context)
   return HttpResponse(response)
@@ -88,3 +87,14 @@ def review_new(request, id):
       review.product = product
       review.save()
       return redirect('product_details', id=product.id)
+
+def edit_review(request, id):
+  review = Review.objects.get(pk=id)
+  form = ReviewForm(instance=review)
+  context = {
+    'form': form,
+    'title': 'Review Edit',
+    'review': review
+  }
+  response = render(request, 'review_edit.html', context)
+  return HttpResponse(response)

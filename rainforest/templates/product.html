@@ -23,6 +23,7 @@
         {% for review in product.reviews.all %}
         <li>
             {{ review }} - {{ review.published_date }}
+            <a href="{% url 'edit_review' id=review.pk %}">Edit Review</a>
         </li>
         {% endfor %}
     </ul>
